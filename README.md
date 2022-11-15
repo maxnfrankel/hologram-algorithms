@@ -31,6 +31,6 @@ S | $0.29$ | $0.01$ | $266$
 SR | $0.85 \pm 0.01$ | $0.22 \pm 0.06$ | $38 \pm 2$
 GS | $0.937 \pm 0.003$ | $0.63 \pm 0.05$ | $17 \pm 1$
 
-I calculated e, u, and $\sigma$ in 10 runs and found the average and standard deviation, which are the values displayed in my table. S is an analytic solution, and thus the discrepancy between my values and theirs is likely due to our slightly different choice of trap geometry.
+I calculated e, u, and $\sigma$ in 10 runs and found the average and standard deviation, which are the values displayed in my table. S is an analytic solution, and thus the discrepancy between my values and theirs is likely due to our slightly different choice of trap geometry. It is notable that my SR algorithm performed significantly better than theirs in $e$, $u$, and $\sigma$.
 
 [^1]: R. Di Leonardo, F. Ianni, and G. Ruocco, "Computer generation of optimal holograms for optical trap arrays," Opt. Express 15, 1913-1922 (2007).
