@@ -32,10 +32,11 @@ xm,ym = PtArrayCoords(npx,npy,px,py)
 # we now have all of the inputs. Just comment out all but the algorithm you want to use
 
 #slm_phase = RM(Nx,Ny,xm,ym,showGraph=True)
-#slm_phase = S(Nx,Ny,xm,ym,showGraph=True)
+slm_phase = S(Nx,Ny,xm,ym,showGraph=True)
 #slm_phase = SR(Nx,Ny,xm,ym,showGraph=True)
-slm_phase = GS(Nx,Ny,xm,ym,niter=30,showGraph=False) # niter is the number of iterations for the GS algorithm
+#slm_phase = GS(Nx,Ny,xm,ym,niter=30,showGraph=False) # niter is the number of iterations for the GS algorithm
 
+"""
 # extract slm_phase
 plt.imshow(slm_phase)
 plt.colorbar()
@@ -48,3 +49,4 @@ slm_phase = np.round((slm_phase + cmath.pi)/(2*cmath.pi)*255)
 im = Image.fromarray(slm_phase)
 im = im.convert('RGB')
 im.save(name+"Holo.bmp")
+"""
