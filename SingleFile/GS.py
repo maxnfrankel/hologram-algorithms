@@ -5,7 +5,7 @@ from PtArrayModule import PtArrayCoords
 from analyzeSimModule import perf
 from SRModule import SR
 
-def GS(slm_phase):
+def GS_iteration(slm_phase):
     # get field at SLM
     slm = np.exp(1j*slm_phase)
 
@@ -45,6 +45,7 @@ plt.title('Target')
 plt.show()
 
 # find initial guess for SLM phase through SR algorithm
+print('Performing SR Algorithm initial guess for SLM phase')
 slm_phase = SR(Nx,Ny,xm,ym)
 
 # now it's time to do the GS algorithm
@@ -52,7 +53,7 @@ print('Beginning GS Algorithm')
 niter = 30 # define a number of iterations to apply the GS algorithm
 
 for i in range(niter):
-    slm_phase = GS(slm_phase)
+    slm_phase = GS_iteration(slm_phase)
     print(i)
 
 # create final SLM field
