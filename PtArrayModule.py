@@ -6,7 +6,7 @@ def PtArrayCoords(npx,npy,px,py):
         # px, py are the periodicities in x and y of the point array pattern in pixels
         
     # output:
-        # trap indicies in form [[x0,x1,x2,...,x_M-1],[y0,y1,...,y_M-1]]
+        # xm,ym which are trap coordinates in form [x0,x1,x2,...,x_M-1],[y0,y1,...,y_M-1], indexed from m=0 to M-1
 
     # check if pt array dimensions are even or odd
     lenx = npx*px; leny = npy*py
@@ -19,10 +19,10 @@ def PtArrayCoords(npx,npy,px,py):
     
     # set up indices in x and y direction
     # indices are set up around the origin, with a point at the origin
-    grid_x = np.arange(-npx*px/2,npx*px/2+is_xOdd,px)
-    grid_y = np.arange(-npy*py/2,npy*py/2+is_yOdd,py)
+    grid_xm = np.arange(-npx*px/2,npx*px/2+is_xOdd,px)
+    grid_ym = np.arange(-npy*py/2,npy*py/2+is_yOdd,py)
 
-    x,y = np.meshgrid(grid_x,grid_y)
-    x = x.flatten(); y = y.flatten()
+    xm,ym = np.meshgrid(grid_xm,grid_ym)
+    xm = xm.flatten(); y = ym.flatten()
 
-    return x.astype(int),y.astype(int) # trap coordinates in form [x1,x2,x3,...],[y1,y2,y3,...]
+    return xm.astype(int),ym.astype(int) # trap coordinates in form [x1,x2,x3,...],[y1,y2,y3,...]
