@@ -6,8 +6,8 @@ from PtArrayModule import PtArrayCoords
 from analyzeSimModule import perf
 
 # SLM array dimensions in pixels
-Nx = 10
-Ny = 10
+Nx = 768
+Ny = 768
 
 # create array for indexing
 x,y = np.meshgrid(range(Nx),range(Ny))
@@ -16,10 +16,10 @@ x,y = np.meshgrid(range(Nx),range(Ny))
 trap_plane = np.zeros((Ny,Nx),dtype = float)
 
 # get trap indices
-npx = 2 # number of pts in x direction
-npy = 2 # number of pts in y direction
-px = 5 # x periodicity
-py = 5 # y periodicity
+npx = 10 # number of pts in x direction
+npy = 10 # number of pts in y direction
+px = 70 # x periodicity
+py = 70 # y periodicity
 xm,ym = PtArrayCoords(npx,npy,px,py)
 
 # send light at trap locations
