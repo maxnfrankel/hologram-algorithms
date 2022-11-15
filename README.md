@@ -2,7 +2,7 @@
 
 ## Running an algorithm
 
-Each algorithm is contained in a function in the module corresponding to its name (ex: Gershberg-Saxton algorithm is contained in the module GS.py). To run an algorithm, its corresponding function can be called in a script, together with the parameters for the point array you want to create. For an example, see the file "runAlg.py"
+Each algorithm is contained in a function in the module corresponding to its name (ex: Gershberg-Saxton algorithm is contained in the module GSModule.py). To run an algorithm, its corresponding function can be called in a script, together with the parameters for the point array you want to create. For an example, see the file "runAlg.py"
 
 ## About this project
 
