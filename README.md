@@ -29,5 +29,6 @@ algorithm | e (mine) | u (mine) | $\sigma$ (mine)
 RM | 0.01 | 0.60 | 18
 S | 0.29 | 0.01 | 266
 SR | 0.83 | 0.27 | 40
+GS | 0.94 | 0.60 | 16
 
 [^1]: R. Di Leonardo, F. Ianni, and G. Ruocco, "Computer generation of optimal holograms for optical trap arrays," Opt. Express 15, 1913-1922 (2007).
