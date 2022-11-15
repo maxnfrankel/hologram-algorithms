@@ -2,9 +2,10 @@ import cmath
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.fft as fft
+from PtArrayModule import PtArrayCoords
 from analyzeSimModule import perf
 
-def SR(Nx,Ny,xm,ym,showGraph=False):
+def RM(Nx,Ny,xm,ym,showGraph=False):
 
     # inputs:
         # Nx, Ny: the SLM's dimensions in pixels
@@ -14,28 +15,42 @@ def SR(Nx,Ny,xm,ym,showGraph=False):
         # 2D array of values between -pi and pi. Values come from the optimization of the slm phase using the SR method
 
     # for each trap, there is a random theta_m corresponding to the trap's phase
-    theta_m = np.random.uniform(-cmath.pi,cmath.pi,size=xm.size)
+    # create array for indexing
+    x,y = np.meshgrid(range(Nx),range(Ny))
 
     # create trap plane with same dimensions as SLM
-    trap_plane = np.zeros((Ny,Nx), dtype=complex)
+    trap_plane = np.zeros((Ny,Nx),dtype = complex)
 
     # send light at trap locations
-    trap_plane[ym,xm] = np.exp(1j*theta_m)
+    trap_plane[ym,xm] = 1.0
 
     if showGraph == True:
         plt.imshow(fft.fftshift(abs(trap_plane)))
         plt.title('Target signal')
         plt.show()
 
-    # calculate slm phase
-    slm_phase = np.angle(fft.ifft2(trap_plane))
+    # create the SLM plane
+    slm_phase = np.empty((Ny,Nx), dtype=float)
 
-    # create slm field
+    # choose random number from 0 to n_traps-1 for each slm pixel
+    n_traps = xm.size
+    random_num = np.random.randint(n_traps,size=(Ny,Nx))
+
+    if showGraph == True:
+        plt.imshow(random_num)
+        plt.title('SLM plane, trap # which each pixel corresponds to')
+        plt.show()
+
+    # set phi_j in each slm pixel
+    xjxm = np.multiply(x,xm[random_num])/Nx
+    yjym = np.multiply(y,ym[random_num])/Ny
+
+    slm_phase = 2*cmath.pi*(np.add(xjxm,yjym))
+
     slm = np.exp(1j*slm_phase)
 
-    # take the fourier transform to evaluate performance
     ft = fft.fft2((slm))
-    print("SR result: e , u, sigma = ", perf(xm,ym,abs(ft)))
+    print("RM result: e , u, sigma = ", perf(xm,ym,abs(ft)))
 
     if showGraph == True:
         plt.imshow(fft.fftshift(abs(ft)))

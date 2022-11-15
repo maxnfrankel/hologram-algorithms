@@ -5,7 +5,7 @@ from PtArrayModule import PtArrayCoords
 from analyzeSimModule import perf
 from SRModule import SR
 
-def GS_iteration(slm_phase):
+def GS_iteration(slm_phase,trap_plane):
     # get field at SLM
     slm = np.exp(1j*slm_phase)
 
@@ -23,48 +23,48 @@ def GS_iteration(slm_phase):
     # only return phase
     return slm_phase
 
-# SLM array dimensions in pixels
-Nx = 768
-Ny = 768
+def GS(Nx,Ny,xm,ym,niter,showGraph=False):
 
-# create trap plane with same dimensions as SLM
-trap_plane = np.zeros((Ny,Nx),dtype = float)
+    # inputs:
+        # Nx, Ny: the SLM's dimensions in pixels
+        # xm, ym: both 1D arrays with the x and y coords of each trap, in order
 
-# get trap indices
-npx = 10 # number of pts in x direction
-npy = 10 # number of pts in y direction
-px = 70 # x periodicity
-py = 70 # y periodicity
-xm,ym = PtArrayCoords(npx,npy,px,py)
+    # output:
+        # 2D array of values between -pi and pi. Values come from the optimization of the slm phase using the SR method
 
-# send light at trap locations
-trap_plane[ym.astype(int),xm.astype(int)] = 1.0
+    # create trap plane with same dimensions as SLM
+    trap_plane = np.zeros((Ny,Nx),dtype = float)
 
-plt.imshow(fft.fftshift(trap_plane))
-plt.title('Target')
-plt.show()
+    # send light at trap locations
+    trap_plane[ym.astype(int),xm.astype(int)] = 1.0
 
-# find initial guess for SLM phase through SR algorithm
-print('Performing SR Algorithm initial guess for SLM phase')
-slm_phase = SR(Nx,Ny,xm,ym)
+    if showGraph == True:
+        plt.imshow(fft.fftshift(trap_plane))
+        plt.title('Target signal')
+        plt.show()
 
-# now it's time to do the GS algorithm
-print('Beginning GS Algorithm')
-niter = 30 # define a number of iterations to apply the GS algorithm
+    # find initial guess for SLM phase through SR algorithm
+    print('Performing SR Algorithm initial guess for SLM phase')
+    slm_phase = SR(Nx,Ny,xm,ym)
 
-for i in range(niter):
-    slm_phase = GS_iteration(slm_phase)
-    print(i)
+    # now it's time to do the GS algorithm
+    print('Beginning GS Algorithm')
 
-# create final SLM field
-slm = np.exp(1j*slm_phase)
+    for i in range(niter):
+        slm_phase = GS_iteration(slm_phase,trap_plane)
 
-# take the Fourier Transform to get the signal
-ft = fft.fft2((slm))
+    # create final SLM field
+    slm = np.exp(1j*slm_phase)
 
-print("GS result after ",i," iterations: e , u, sigma = ",perf(xm,ym,abs(ft)))
+    # take the Fourier Transform to get the signal
+    ft = fft.fft2((slm))
 
-plt.imshow(fft.fftshift(abs(ft)))
-plt.title('Result')
-plt.colorbar()
-plt.show()
+    print("GS result after ",i+1," iterations: e , u, sigma = ",perf(xm,ym,abs(ft)))
+
+    if showGraph == True:
+        plt.imshow(fft.fftshift(abs(ft)))
+        plt.title('Resulting signal')
+        plt.colorbar()
+        plt.show()
+
+    return fft.fftshift(slm_phase)

@@ -1,9 +1,9 @@
-import cmath
 import numpy as np
+import matplotlib.pyplot as plt
 import scipy.fft as fft
 from analyzeSimModule import perf
 
-def S(Nx,Ny,xm,ym):
+def S(Nx,Ny,xm,ym,showGraph=False):
 
     # inputs:
         # Nx, Ny: the SLM's dimensions in pixels
@@ -18,6 +18,11 @@ def S(Nx,Ny,xm,ym):
     # send light at trap locations
     trap_plane[ym,xm] = 1.0
 
+    if showGraph == True:
+        plt.imshow(fft.fftshift(abs(trap_plane)))
+        plt.title('Target signal')
+        plt.show()
+
     # calculate slm phase
     slm_phase = np.angle(fft.ifft2(trap_plane))
 
@@ -28,4 +33,10 @@ def S(Nx,Ny,xm,ym):
     ft = fft.fft2((slm))
     print("S result: e , u, sigma = ", perf(xm,ym,abs(ft)))
 
-    return slm_phase
+    if showGraph == True:
+        plt.imshow(fft.fftshift(abs(ft)))
+        plt.title('Resulting signal')
+        plt.colorbar()
+        plt.show()
+
+    return fft.fftshift(slm_phase)

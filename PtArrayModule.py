@@ -23,6 +23,6 @@ def PtArrayCoords(npx,npy,px,py):
     grid_ym = np.arange(-npy*py/2,npy*py/2+is_yOdd,py)
 
     xm,ym = np.meshgrid(grid_xm,grid_ym)
-    xm = xm.flatten(); y = ym.flatten()
+    xm = xm.flatten(); ym = ym.flatten()
 
     return xm.astype(int),ym.astype(int) # trap coordinates in form [x1,x2,x3,...],[y1,y2,y3,...]
