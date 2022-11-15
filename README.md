@@ -26,9 +26,11 @@ GSW | 0.93 | 0.99 | 1
 
 algorithm | e (mine) | u (mine) | $\sigma$ (mine)
 ---|---|---|---
-RM | 0.01 | 0.60 | 18
+RM | $0.0102 \pm 0.0001$ | $0.59 \pm 0.03$ | $17.5 \pm 0.9$
 S | 0.29 | 0.01 | 266
-SR | 0.83 | 0.27 | 40
-GS | 0.94 | 0.60 | 16
+SR | $0.85 \pm 0.01$ | $0.22 \pm 0.06$ | $38 \pm 2$
+GS | $0.937 \pm 0.003$ | $0.63 \pm 0.05$ | $17 \pm 1$
+
+I calculated e, u, and $\sigma$ in 10 runs and found the average and standard deviation, which are the values displayed in my table.
 
 [^1]: R. Di Leonardo, F. Ianni, and G. Ruocco, "Computer generation of optimal holograms for optical trap arrays," Opt. Express 15, 1913-1922 (2007).
