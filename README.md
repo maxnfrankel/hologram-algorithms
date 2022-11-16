@@ -46,8 +46,10 @@ I calculated e, u, and $\sigma$ in 10 runs and found the average and standard de
 
 The GS and GAA algorithms both use SR as a starting guess for slm phase and then iteratively converge to a solution. My calculation of the performance of GS was done using the same set of converged holograms that were used to calculate the performance of SR. GAA was calculated separately, with a new set of SR solutions.
 
-In the Leonardo et. al. paper, they use $\xi = 0.5$. I found that the optimal choice of $xi$ seems to vary depending initial phase guess around an average value of $0.74 \pm 0.10$, where $\pm 0.10$ is the standard deviation in the optimal $\xi$ values over 10 runs. Here are graphs of performance vs 100 evenly spaced values of $\xi$ between 0 and 1:
+In the Leonardo et. al. paper, they use $\xi = 0.5$. I found that the optimal choice of $\xi$ seems to vary depending initial phase guess around an average value of $0.74 \pm 0.10$, where $\pm 0.10$ is the standard deviation in the optimal $\xi$ values over 10 runs. Here are graphs of performance vs 100 evenly spaced values of $\xi$ between 0 and 1:
 
 [graphs of performance vs xi](https://github.com/maxnfrankel/hologram-algorithms/blob/main/GAAPerformanceVsXi.pdf)
+
+The values I found for $u$ at $\xi = 0.5$ are significantly lower than those found by Leonardo et. al.
 
 [^1]: R. Di Leonardo, F. Ianni, and G. Ruocco, "Computer generation of optimal holograms for optical trap arrays," Opt. Express 15, 1913-1922 (2007).
