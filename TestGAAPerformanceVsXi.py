@@ -19,8 +19,8 @@ Nx = 768
 Ny = 768
 
 # set the point array dimensions
-npx = 10 # number of pts in x direction
-npy = 10 # number of pts in y direction
+npx = 11 # number of pts in x direction
+npy = 11 # number of pts in y direction
 px = 70 # x periodicity
 py = 70 # y periodicity
 
