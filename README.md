@@ -22,6 +22,10 @@ $\sigma = 100\sqrt{\langle (I - \langle I \rangle)^2 \rangle} / \langle I \rangl
 
 where $I_m$ is the intensity at the $m^{th}$ trap coordinate $(x_m,y_m)$, and $\langle I \rangle$ denotes the average over $m$.
 
+Each algorithm boils to a maximization problem. To maximize the fraction of the total light sent to traps, or $e$, we simply seek to maximize the sum of the magnitudes of the electric field at each trap with respect to the 768x768 SLM pixels, each of which is treated as a single variable. The maximization is done with increasing accuracy for RM, S, SR, and GS. 
+
+For GAA, we seek to maximize a combination of both the sum of electric field amplitudes at traps and their product. Maximizing the product of the electric field amplitudes creates a bias towards maximizing the uniformity, as the greatest possible "volume" is created when the "surface area" is as small as possible. In other words, for a certain total amount of light, the product of the magnitude of the electric field at each trap is maximized when the energy is uniformly distributed between the different traps.
+
 The numerically simulated performance of my algorithms compared to the performance recorded by Leonardo et al. is shown in the tables below. The algorithms were used to create holgram of a 10x10 grid of traps for a 768x768 pixel SLM.
 
 algorithm | e (theirs) | u (theirs) | $\sigma$ (theirs) 
