@@ -40,14 +40,16 @@ RM | $0.0102 \pm 0.0001$ | $0.59 \pm 0.03$ | $17.5 \pm 0.9$
 S | $0.29$ | $0.01$ | $266$
 SR | $0.85 \pm 0.01$ | $0.22 \pm 0.06$ | $38 \pm 2$
 GS | $0.937 \pm 0.003$ | $0.63 \pm 0.05$ | $17 \pm 1$
-GAA| $0.933 \pm 0.004$ | $0.74 \pm 0.03 | $ 11 \pm 1$
+GAA| $0.933 \pm 0.004$ | $0.74 \pm 0.03$ | $11 \pm 1$
 
 I calculated e, u, and $\sigma$ in 10 runs and found the average and standard deviation, which are the values displayed in my table. S is an analytic solution, and thus had no standard deviation. The discrepancy between my values and theirs is likely due to our slightly different choice of trap geometry. It is notable that my SR algorithm performed significantly better than theirs in $e$, $u$, and $\sigma$.
 
 The GS and GAA algorithms both use SR as a starting guess for slm phase and then iteratively converge to a solution. My calculation of the performance of GS was done using the same set of converged holograms that were used to calculate the performance of SR. GAA was calculated separately, with a new set of SR solutions.
 
-In the Leonardo et. al. paper, they use $\xi = 0.5$. I found that the optimal choice of $xi$ seems to vary depending initial phase guess around an average value of $0.74 \pm 0.10$, where $\pm 0.10$ is the standard deviation in the optimal $\xi$ values over 10 runs. Here are graphs of performance vs 100 evenly spaced values of $\xi$ between 0 and 1:
+In the Leonardo et. al. paper, they use $\xi = 0.5$. I found that the optimal choice of $\xi$ seems to vary depending initial phase guess around an average value of $0.74 \pm 0.10$, where $\pm 0.10$ is the standard deviation in the optimal $\xi$ values over 10 runs. Here are graphs of performance vs 100 evenly spaced values of $\xi$ between 0 and 1:
 
 [graphs of performance vs xi](https://github.com/maxnfrankel/hologram-algorithms/blob/main/GAAPerformanceVsXi.pdf)
+
+The values I found for $u$ at $\xi = 0.5$ are significantly lower than those found by Leonardo et. al., and I'm not sure why. Perhaps it has to do with our differring trap geometries, or because we are already getting different results from the SR algorithm, which is used as an initial guess for GAA. However, my SR algorithm outperforms there's, so I don't see why my GAA algorithm shouldn't as well. My GS algorithm had performance consistent with there's, though, and that also used my SR algorithm as an intial guess. At least the GAA algorithm does show an improvement in $e$ from the GS algorithm, although $u$ is sacrificed.
 
 [^1]: R. Di Leonardo, F. Ianni, and G. Ruocco, "Computer generation of optimal holograms for optical trap arrays," Opt. Express 15, 1913-1922 (2007).
