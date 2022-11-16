@@ -8,9 +8,11 @@ def S(Nx,Ny,xm,ym,showGraph=False):
     # inputs:
         # Nx, Ny: the SLM's dimensions in pixels
         # xm, ym: both 1D arrays with the x and y coords of each trap, in order
+        # showGraph: when true, graphs of the target and resulting signal plane are shown
 
-    # output:
-        # 2D array of values between -pi and pi. Values come from the optimization of the slm phase using the SR method
+    # output: slm_phase, performance
+        # slm_phase: 2D array of values between -pi and pi. Values come from the optimization of the slm phase using the S method
+        # performance: [e, u, sigma] where e is efficiency, u is unifority, and sigma is fractional standard deviation, as defined in Leonardo et. al.
 
     # create trap plane with same dimensions as SLM
     trap_plane = np.zeros((Ny,Nx), dtype=complex)
@@ -31,7 +33,8 @@ def S(Nx,Ny,xm,ym,showGraph=False):
 
     # take the fourier transform to evaluate performance
     ft = fft.fft2((slm))
-    print("S result: e , u, sigma = ", perf(xm,ym,abs(ft)))
+
+    performance = perf(xm,ym,abs(ft))
 
     if showGraph == True:
         plt.imshow(fft.fftshift(abs(ft)))
@@ -39,4 +42,4 @@ def S(Nx,Ny,xm,ym,showGraph=False):
         plt.colorbar()
         plt.show()
 
-    return fft.fftshift(slm_phase)
+    return fft.fftshift(slm_phase), performance
