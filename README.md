@@ -10,7 +10,9 @@ This repository contains different algorithms used for creating holograms of opt
 
 The algorithms in this repository are based off of a paper by Leonardo et al [^1].
 
-In the paper of Leonardo et al, the performance of each algorithm was quantified by efficiency $e$, uniformity $u$, and percent standard deviation $\sigma$
+## Analysis of the algorithms
+
+In the paper of Leonardo et al, to evaluate the performance of each algorithm introduced, each was used to create holgram of a 10x10 grid of traps for a 768x768 pixel SLM. The performance of an algorithm was quantified by efficiency $e$, uniformity $u$, and percent standard deviation $\sigma$
 
 $e = \sum_{m}{I_m}$
 
