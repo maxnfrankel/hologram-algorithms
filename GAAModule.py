@@ -70,7 +70,6 @@ def GAA(slm_phase,Nx,Ny,xm,ym,niter,xi,showGraph=False):
     ft = fft.fft2((slm))
 
     performance = perf(xm,ym,abs(ft))
-    print("GAA result after ",i+1," iterations: e , u, sigma = ", performance)
 
     if showGraph == True:
         plt.imshow(fft.fftshift(abs(ft)))

@@ -60,7 +60,6 @@ def GS(slm_phase,Nx,Ny,xm,ym,niter,showGraph=False):
     ft = fft.fft2((slm))
 
     performance = perf(xm,ym,abs(ft))
-    print("GS result after ",i+1," iterations: e , u, sigma = ", performance)
 
     if showGraph == True:
         plt.imshow(fft.fftshift(abs(ft)))

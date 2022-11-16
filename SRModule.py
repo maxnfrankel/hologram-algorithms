@@ -39,7 +39,6 @@ def SR(Nx,Ny,xm,ym,showGraph=False):
     ft = fft.fft2((slm))
 
     performance = perf(xm,ym,abs(ft))
-    print("SR result: e , u, sigma = ", performance)
 
     if showGraph == True:
         plt.imshow(fft.fftshift(abs(ft)))

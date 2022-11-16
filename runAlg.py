@@ -29,19 +29,19 @@ py = 70 # y periodicity
 # form pt array
 xm,ym = PtArrayCoords(npx,npy,px,py)
 
-# all the functions (RM, S, SR, GS) that perform the different algorithms take inputs in the form (Nx,Ny,xm,ym)
+# all the functions (RM, S, SR, GS, GAA, GSW) that perform the different algorithms take inputs in the form (Nx,Ny,xm,ym)
 # we now have all of the inputs. Just comment out all but the algorithm you want to use
 
-#slm_phase = RM(Nx,Ny,xm,ym,showGraph=True)
-#slm_phase = S(Nx,Ny,xm,ym,showGraph=True)
-#slm_phase = SR(Nx,Ny,xm,ym,showGraph=True)
+#slm_phase, perf_RM = RM(Nx,Ny,xm,ym,showGraph=True)
+#slm_phase, perf_S = S(Nx,Ny,xm,ym,showGraph=True)
+#slm_phase, perf_SR = SR(Nx,Ny,xm,ym,showGraph=True)
 
-# find initial guess for SLM phase through SR algorithm
+# to do the GS, GAA, GSW,find initial guess for SLM phase through SR algorithm
 print('Performing SR Algorithm initial guess for SLM phase')
 initial_slm_phase, perf_SR = SR(Nx,Ny,xm,ym,showGraph=False)
 
 slm_phase, perf_GS = GS(initial_slm_phase,Nx,Ny,xm,ym,niter=30,showGraph=False) # niter is the number of iterations for the GS algorithm
-slm_phase, perf_GAA = GAA(initial_slm_phase,Nx,Ny,xm,ym,niter=30,xi=0.5,showGraph=False) # xi is a number between 0 and 1 that determines how much the maximization of Sum(log|V_m|) is prioritized over Sum(|Vm|)
+slm_phase, perf_GAA = GAA(initial_slm_phase,Nx,Ny,xm,ym,niter=30,xi=0.8,showGraph=False) # xi is a number between 0 and 1 that determines how much the maximization of Sum(log|V_m|) is prioritized over Sum(|Vm|)
 
 # uncomment the code below to save the hologram
 """
