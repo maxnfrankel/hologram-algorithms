@@ -10,9 +10,12 @@ def RM(Nx,Ny,xm,ym,showGraph=False):
     # inputs:
         # Nx, Ny: the SLM's dimensions in pixels
         # xm, ym: both 1D arrays with the x and y coords of each trap, in order
+        # showGraph: when true, graphs of the target and resulting signal plane are shown
 
-    # output:
-        # 2D array of values between -pi and pi. Values come from the optimization of the slm phase using the SR method
+    # output: slm_phase, performance
+        # slm_phase: 2D array of values between -pi and pi. Values come from the optimization of the slm phase using the RM method
+        # performance: [e, u, sigma] where e is efficiency, u is unifority, and sigma is fractional standard deviation, as defined in Leonardo et. al.
+
 
     # for each trap, there is a random theta_m corresponding to the trap's phase
     # create array for indexing
@@ -50,7 +53,9 @@ def RM(Nx,Ny,xm,ym,showGraph=False):
     slm = np.exp(1j*slm_phase)
 
     ft = fft.fft2((slm))
-    print("RM result: e , u, sigma = ", perf(xm,ym,abs(ft)))
+
+    performance = perf(xm,ym,abs(ft))
+    print("SR result: e , u, sigma = ", performance)
 
     if showGraph == True:
         plt.imshow(fft.fftshift(abs(ft)))
@@ -58,4 +63,4 @@ def RM(Nx,Ny,xm,ym,showGraph=False):
         plt.colorbar()
         plt.show()
 
-    return fft.fftshift(slm_phase)
+    return fft.fftshift(slm_phase), performance
