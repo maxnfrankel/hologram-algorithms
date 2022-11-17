@@ -37,7 +37,7 @@ GS | $0.94$ | $0.60$ | $17$
 GAA | $0.93$ | $0.79$ | $9$
 DS | $0.68$ | $1.00$ | $0$
 GSW | $0.93$ | $0.99$ | $1$
-[table caption]
+: table caption
 
 algorithm | e (mine) | u (mine) | $\sigma$ (mine)
 ---|---|---|---
