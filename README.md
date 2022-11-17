@@ -45,7 +45,7 @@ S | $0.29$ | $0.01$ | $266$
 SR | $0.85 \pm 0.01$ | $0.27 \pm 0.03$ | $36 \pm 3$
 GS | $0.938 \pm 0.003$ | $0.56 \pm 0.05$ | $18 \pm 2$
 GAA| $0.933 \pm 0.004$ | $0.74 \pm 0.03$ | $11 \pm 1$
-GSW| $0.923 \pm 0.005$ | $0.97 \pm 0.01$ | $10 \pm 5$
+GSW| $0.923 \pm 0.005$ | $0.97 \pm 0.01$ | $1.0 \pm 0.5$
 
 I calculated e, u, and $\sigma$ in 10 runs and found the average and standard deviation, which are the values displayed in my table. S is an analytic solution, and thus had no standard deviation. The discrepancy between my values and theirs is likely due to our slightly different choice of trap geometry. It is notable that my SR algorithm performed significantly better than theirs in $e$, $u$, and $\sigma$.
 
@@ -58,7 +58,6 @@ In the Leonardo et. al. paper, they use $\xi = 0.5$. I found that the optimal ch
 The values I found for $u$ at $\xi = 0.5$ are all lower than that found by Leonardo et. al., and I'm not sure why. Perhaps it has to do with our differring trap geometries, or because we are already getting different results from the SR algorithm, which is used as an initial guess for GAA. However, my SR algorithm outperforms theirs, so I don't see why my GAA algorithm shouldn't as well. My GS algorithm had performance consistent with theirs, though, and that also used my SR algorithm as an intial guess. At least the GAA algorithm does show an improvement in $e$ from the GS algorithm, although $u$ is sacrificed.
 
 My GSW also underperformed, not quite reaching $u=0.99$. However, after 100 iterations instead of 30, the algorithm achieved
-
 $e = 0.932 \pm 0.001$,   $u = 0.991 \pm 0.001$,   $\sigma = 0.4 \pm 0.2$
 
 over 10 runs.
