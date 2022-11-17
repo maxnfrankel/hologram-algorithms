@@ -53,7 +53,7 @@ The GS, GAA, and GSW algorithms all use SR as a starting guess for slm phase and
 
 In the Leonardo et. al. paper, they use $\xi = 0.5$. I found that the optimal choice of $\xi$ seems to vary depending initial phase guess around an average value of $0.74 \pm 0.10$, where $\pm 0.10$ is the standard deviation in the optimal $\xi$ values over 10 runs. Here are graphs of performance vs 100 evenly spaced values of $\xi$ between 0 and 1:
 
-[graphs of performance vs xi](https://github.com/maxnfrankel/hologram-algorithms/blob/main/GAAPerformanceVsXi.pdf](https://github.com/maxnfrankel/hologram-algorithms/blob/main/TestGAA/GAAPerformanceVsXi.pdf))
+[GAAPerformanceVsXi.pdf](https://github.com/maxnfrankel/hologram-algorithms/files/10036176/GAAPerformanceVsXi.pdf)
 
 The values I found for $u$ at $\xi = 0.5$ are all lower than that found by Leonardo et. al., and I'm not sure why. Perhaps it has to do with our differring trap geometries, or because we are already getting different results from the SR algorithm, which is used as an initial guess for GAA. However, my SR algorithm outperforms theirs, so I don't see why my GAA algorithm shouldn't as well. My GS algorithm had performance consistent with theirs, though, and that also used my SR algorithm as an intial guess. At least the GAA algorithm does show an improvement in $e$ from the GS algorithm, although $u$ is sacrificed.
 
