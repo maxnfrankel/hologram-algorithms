@@ -63,6 +63,6 @@ $e = 0.932 \pm 0.001$,   $u = 0.991 \pm 0.001$,   $\sigma = 0.4 \pm 0.2$
 
 over 10 runs. After 500 iterations, the algorithm achieved 
 
-$e = 0.938$,   $u = 0.999997$,   $\sigma = 0.0001
+$e = 0.938$,   $u = 0.999997$,   $\sigma = 0.0001$
 
 [^1]: R. Di Leonardo, F. Ianni, and G. Ruocco, "Computer generation of optimal holograms for optical trap arrays," Opt. Express 15, 1913-1922 (2007).
