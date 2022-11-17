@@ -65,7 +65,12 @@ over 10 runs. After 500 iterations, the algorithm achieved
 
 $e = 0.938$,   $u = 0.999997$,   $\sigma = 0.0001$
 
+Below is a graph showing the evolutionn of $e$, $u$, and $\sigma$ over iteration step number in a single run:
+
 ![GSWPerformanceVsIteration](https://user-images.githubusercontent.com/110007295/202573528-cfea5604-05e3-4e05-be83-70af4dd3c51c.png)
+
+To get an idea of how close we are to our ideal values of $e=1$, $u=1$, and $\sigma=0$, here is a plot of $\log_{10}(1-e)$, $\log_{10}(1-u)$, and $\log_{10}(1-\sigma)$ for the same run.
+
 ![GSWPerformanceVsIterationLogScale](https://user-images.githubusercontent.com/110007295/202573532-87f14621-9e1d-4273-a957-495a8e90313d.png)
 
 
