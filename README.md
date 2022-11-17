@@ -65,4 +65,7 @@ over 10 runs. After 500 iterations, the algorithm achieved
 
 $e = 0.938$,   $u = 0.999997$,   $\sigma = 0.0001$
 
+[GSWPerformance](./TestGSW/500 iterations/GSWPerformanceVsIteration.png)
+[GSWPerformanceLog](./TestGSW/500 iterations/GSWPerformanceVsIterationLogScale.png)
+
 [^1]: R. Di Leonardo, F. Ianni, and G. Ruocco, "Computer generation of optimal holograms for optical trap arrays," Opt. Express 15, 1913-1922 (2007).
