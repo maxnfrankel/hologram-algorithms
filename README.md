@@ -45,6 +45,7 @@ S | $0.29$ | $0.01$ | $266$
 SR | $0.85 \pm 0.01$ | $0.27 \pm 0.03$ | $36 \pm 3$
 GS | $0.938 \pm 0.003$ | $0.56 \pm 0.05$ | $18 \pm 2$
 GAA| $0.933 \pm 0.004$ | $0.74 \pm 0.03$ | $11 \pm 1$
+DS | / | / | /
 GSW| $0.923 \pm 0.005$ | $0.97 \pm 0.01$ | $1.0 \pm 0.5$
 
 I calculated e, u, and $\sigma$ in 10 runs and found the average and standard deviation, which are the values displayed in my table. S is an analytic solution, and thus had no standard deviation. The discrepancy between my values and theirs is likely due to our slightly different choice of trap geometry. It is notable that my SR algorithm performed significantly better than theirs in $e$, $u$, and $\sigma$.
