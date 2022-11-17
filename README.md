@@ -28,7 +28,7 @@ For GAA, we seek to maximize a combination of both the sum of electric field amp
 
 The numerically simulated performance of my algorithms compared to the performance recorded by Leonardo et al. is shown in the tables below. The algorithms were used to create holgram of a 10x10 grid of traps for a 768x768 pixel SLM.
 
-# Their performance
+### Their performance
 algorithm | e | u | $\sigma$ 
 ---|---|---|---
 RM | $0.01$ | $0.58$ | $16$ 
@@ -39,7 +39,7 @@ GAA | $0.93$ | $0.79$ | $9$
 DS | $0.68$ | $1.00$ | $0$
 GSW | $0.93$ | $0.99$ | $1$
 
-# My performances
+### My performance
 algorithm | e | u | $\sigma$
 ---|---|---|---
 RM | $0.0102 \pm 0.0001$ | $0.59 \pm 0.03$ | $17.5 \pm 0.9$
