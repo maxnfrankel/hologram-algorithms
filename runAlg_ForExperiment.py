@@ -27,6 +27,7 @@ Ny = 1024
 # set the point array dimensions
 npx = 60 # number of pts in x direction
 npy = 60 # number of pts in y direction
+
 px = 5 # x periodicity
 py = 5 # y periodicity
 
@@ -74,4 +75,5 @@ slm_phase_fullsize[round(Ny/2 - n/2):round(Ny/2+n/2),round(Nx/2 - n/2):round(Nx/
 # save hologram
 im = Image.fromarray(slm_phase_fullsize)
 im = im.convert('RGB')
+
 im.save(name+"GSW_5p_Holo.bmp")
