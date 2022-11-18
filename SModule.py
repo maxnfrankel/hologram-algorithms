@@ -3,10 +3,10 @@ import matplotlib.pyplot as plt
 import scipy.fft as fft
 from analyzeSimModule import perf
 
-def S(Nx,Ny,xm,ym,showGraph=False):
+def S(n,xm,ym,showGraph=False):
 
     # inputs:
-        # Nx, Ny: the SLM's dimensions in pixels
+        # n: the holograms's dimensions in pixels is nxn
         # xm, ym: both 1D arrays with the x and y coords of each trap, in order
         # showGraph: when true, graphs of the target and resulting signal plane are shown
 
@@ -15,7 +15,7 @@ def S(Nx,Ny,xm,ym,showGraph=False):
         # performance: [e, u, sigma] where e is efficiency, u is unifority, and sigma is fractional standard deviation, as defined in Leonardo et. al.
 
     # create trap plane with same dimensions as SLM
-    trap_plane = np.zeros((Ny,Nx), dtype=complex)
+    trap_plane = np.zeros((n,n), dtype=complex)
 
     # send light at trap locations
     trap_plane[ym,xm] = 1.0

@@ -23,11 +23,11 @@ def GS_iteration(slm_phase,trap_plane):
     # only return phase
     return slm_phase
 
-def GS(slm_phase,Nx,Ny,xm,ym,niter,showGraph=False):
+def GS(slm_phase,n,xm,ym,niter,showGraph=False):
 
     # inputs:
-        # slm_phase: Nx*Ny array with initial guess for the slm phase, with values btween -pi and pi
-        # Nx, Ny: the SLM's dimensions in pixels
+        # slm_phase: nxn array with initial guess for the slm phase, with values btween -pi and pi
+        # n: the hologram's dimensions in pixels is nxn
         # xm, ym: both 1D arrays with the x and y coords of each trap, in order
         # niter: number of iterations in the algorithm
         # showGraph: when true, graphs of the target and resulting signal plane are shown
@@ -37,7 +37,7 @@ def GS(slm_phase,Nx,Ny,xm,ym,niter,showGraph=False):
         # performance: [e, u, sigma] where e is efficiency, u is unifority, and sigma is fractional standard deviation, as defined in Leonardo et. al.
 
     # create trap plane with same dimensions as SLM
-    trap_plane = np.zeros((Ny,Nx),dtype = float)
+    trap_plane = np.zeros((n,n),dtype = float)
 
     # send light at trap locations
     trap_plane[ym.astype(int),xm.astype(int)] = 1.0

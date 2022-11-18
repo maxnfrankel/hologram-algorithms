@@ -4,10 +4,10 @@ import matplotlib.pyplot as plt
 import scipy.fft as fft
 from analyzeSimModule import perf
 
-def SR(Nx,Ny,xm,ym,showGraph=False):
+def SR(n,xm,ym,showGraph=False):
 
     # inputs:
-        # Nx, Ny: the SLM's dimensions in pixels
+        # n: the hologam's dimensions in pixels is nxn
         # xm, ym: both 1D arrays with the x and y coords of each trap, in order
         # showGraph: when true, graphs of the target and resulting signal plane are shown
 
@@ -19,7 +19,7 @@ def SR(Nx,Ny,xm,ym,showGraph=False):
     theta_m = np.random.uniform(-cmath.pi,cmath.pi,size=xm.size)
 
     # create trap plane with same dimensions as SLM
-    trap_plane = np.zeros((Ny,Nx), dtype=complex)
+    trap_plane = np.zeros((n,n), dtype=complex)
 
     # send light at trap locations
     trap_plane[ym,xm] = np.exp(1j*theta_m)

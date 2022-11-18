@@ -5,10 +5,10 @@ import scipy.fft as fft
 from PtArrayModule import PtArrayCoords
 from analyzeSimModule import perf
 
-def RM(Nx,Ny,xm,ym,showGraph=False):
+def RM(n,xm,ym,showGraph=False):
 
     # inputs:
-        # Nx, Ny: the SLM's dimensions in pixels
+        # n: the holograms's dimensions in pixels is nxn
         # xm, ym: both 1D arrays with the x and y coords of each trap, in order
         # showGraph: when true, graphs of the target and resulting signal plane are shown
 
@@ -19,10 +19,10 @@ def RM(Nx,Ny,xm,ym,showGraph=False):
 
     # for each trap, there is a random theta_m corresponding to the trap's phase
     # create array for indexing
-    x,y = np.meshgrid(np.arange(-round(Nx/2),round(Nx/2)),np.arange(-round(Ny/2),round(Ny/2)))
+    x,y = np.meshgrid(np.arange(-round(n/2),round(n/2)),np.arange(-round(n/2),round(n/2)))
 
     # create trap plane with same dimensions as SLM
-    trap_plane = np.zeros((Ny,Nx),dtype = complex)
+    trap_plane = np.zeros((n,n),dtype = complex)
 
     # send light at trap locations
     trap_plane[ym,xm] = 1.0
@@ -33,11 +33,11 @@ def RM(Nx,Ny,xm,ym,showGraph=False):
         plt.show()
 
     # create the SLM plane
-    slm_phase = np.empty((Ny,Nx), dtype=float)
+    slm_phase = np.empty((n,n), dtype=float)
 
     # choose random number from 0 to n_traps-1 for each slm pixel
     n_traps = xm.size
-    random_num = np.random.randint(n_traps,size=(Ny,Nx))
+    random_num = np.random.randint(n_traps,size=(n,n))
 
     if showGraph == True:
         plt.imshow(random_num)
@@ -45,8 +45,8 @@ def RM(Nx,Ny,xm,ym,showGraph=False):
         plt.show()
 
     # set phi_j in each slm pixel
-    xjxm = np.multiply(x,xm[random_num])/Nx
-    yjym = np.multiply(y,ym[random_num])/Ny
+    xjxm = np.multiply(x,xm[random_num])/n
+    yjym = np.multiply(y,ym[random_num])/n
 
     slm_phase = 2*cmath.pi*(np.add(xjxm,yjym))
 

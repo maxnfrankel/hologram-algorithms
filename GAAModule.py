@@ -31,11 +31,11 @@ def GAA_iteration(slm_phase,trap_plane,xm,ym,xi):
     # only return phase
     return slm_phase
 
-def GAA(slm_phase,Nx,Ny,xm,ym,niter,xi,showGraph=False):
+def GAA(slm_phase,n,xm,ym,niter,xi,showGraph=False):
 
     # inputs: 
-        # slm_phase: Nx*Ny array with initial guess for the slm phase, with values btween -pi and pi
-        # Nx, Ny: the SLM's dimensions in pixels
+        # slm_phase: nxn array with initial guess for the slm phase, with values btween -pi and pi
+        # n: the hologram's dimensions in pixels is nxn
         # xm, ym: both 1D arrays with the x and y coords of each trap, in order
         # niter: number of iterations in the algorithm
         # xi: a float between 0 and 1 that determines how much the maximization of Sum(log|V_m|) is prioritized over Sum(|Vm|)
@@ -47,7 +47,7 @@ def GAA(slm_phase,Nx,Ny,xm,ym,niter,xi,showGraph=False):
 
 
     # create trap plane with same dimensions as SLM
-    trap_plane = np.zeros((Ny,Nx),dtype = float)
+    trap_plane = np.zeros((n,n),dtype = float)
 
     # send light at trap locations
     trap_plane[ym.astype(int),xm.astype(int)] = 1.0
