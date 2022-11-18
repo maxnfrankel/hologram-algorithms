@@ -19,7 +19,7 @@ def RM(Nx,Ny,xm,ym,showGraph=False):
 
     # for each trap, there is a random theta_m corresponding to the trap's phase
     # create array for indexing
-    x,y = np.meshgrid(range(Nx),range(Ny))
+    x,y = np.meshgrid(np.arange(-round(Nx/2),round(Nx/2)),np.arange(-round(Ny/2),round(Ny/2)))
 
     # create trap plane with same dimensions as SLM
     trap_plane = np.zeros((Ny,Nx),dtype = complex)

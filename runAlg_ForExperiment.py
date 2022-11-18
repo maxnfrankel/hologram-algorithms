@@ -19,8 +19,8 @@ from PIL import Image
 name = 'PointArray'
 
 # set the SLM dimensions
-Nx = 1024
-Ny = 1280
+Nx = 1280
+Ny = 1024
 
 # set the point array dimensions
 npx = 60 # number of pts in x direction
@@ -44,16 +44,15 @@ initial_slm_phase, perf_SR = SR(Nx,Ny,xm,ym,showGraph=False)
 
 print(perf_SR)
 
-slm_phase, perf_GS = GS(initial_slm_phase,Nx,Ny,xm,ym,niter=30,showGraph=False) # niter is the number of iterations for the GS algorithm
+#slm_phase, perf_GS = GS(initial_slm_phase,Nx,Ny,xm,ym,niter=30,showGraph=False) # niter is the number of iterations for the GS algorithm
 #slm_phase, perf_GAA = GAA(initial_slm_phase,Nx,Ny,xm,ym,niter=30,xi=0.74,showGraph=False) # xi is a number between 0 and 1 that determines how much the maximization of Sum(log|V_m|) is prioritized over Sum(|Vm|)
 #slm_phase, perf_DS = DS(initial_slm_phase,Nx,Ny,xm,ym,niter=int(round(Nx*Ny*1.3)),f=0.5,showGraph=True)
-#slm_phase, perf_GSW = GSW(initial_slm_phase,Nx,Ny,xm,ym,niter=30,showGraph=False)
+slm_phase, perf_GSW = GSW(initial_slm_phase,Nx,Ny,xm,ym,niter=30,showGraph=True)
 
-print(perf_GS)
+print(perf_GSW)
 
 # uncomment the code below to save the hologram
-# extract slm_phase
-plt.imshow(slm_phase)
+"""plt.imshow(slm_phase)
 plt.colorbar()
 plt.show()
 
@@ -63,4 +62,4 @@ slm_phase = np.round((slm_phase + cmath.pi)/(2*cmath.pi)*255)
 # save hologram
 im = Image.fromarray(slm_phase)
 im = im.convert('RGB')
-im.save(name+"GSHolo_30iter.bmp")
+im.save(name+"GSW_30iter_Holo.bmp")"""

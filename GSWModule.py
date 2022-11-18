@@ -60,7 +60,7 @@ def GSW(slm_phase,Nx,Ny,xm,ym,niter,showGraph=False):
     trap_plane[ym.astype(int),xm.astype(int)] = 1.0
 
     if showGraph == True:
-        plt.imshow(fft.fftshift(trap_plane))
+        plt.imshow(fft.fftshift(abs(trap_plane)))
         plt.title('Target signal')
         plt.show()
 
