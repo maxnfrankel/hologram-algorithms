@@ -28,7 +28,8 @@ For GAA, we seek to maximize a combination of both the sum of electric field amp
 
 The numerically simulated performance of my algorithms compared to the performance recorded by Leonardo et al. is shown in the tables below. The algorithms were used to create holgram of a 10x10 grid of traps for a 768x768 pixel SLM.
 
-algorithm | e (theirs) | u (theirs) | $\sigma$ (theirs) 
+### Their performance
+algorithm | e | u | $\sigma$ 
 ---|---|---|---
 RM | $0.01$ | $0.58$ | $16$ 
 S | $0.29$ | $0.01$ | $257$ 
@@ -38,13 +39,15 @@ GAA | $0.93$ | $0.79$ | $9$
 DS | $0.68$ | $1.00$ | $0$
 GSW | $0.93$ | $0.99$ | $1$
 
-algorithm | e (mine) | u (mine) | $\sigma$ (mine)
+### My performance
+algorithm | e | u | $\sigma$
 ---|---|---|---
 RM | $0.0102 \pm 0.0001$ | $0.59 \pm 0.03$ | $17.5 \pm 0.9$
 S | $0.29$ | $0.01$ | $266$
 SR | $0.85 \pm 0.01$ | $0.27 \pm 0.03$ | $36 \pm 3$
 GS | $0.938 \pm 0.003$ | $0.56 \pm 0.05$ | $18 \pm 2$
 GAA| $0.933 \pm 0.004$ | $0.74 \pm 0.03$ | $11 \pm 1$
+DS | / | / | /
 GSW| $0.923 \pm 0.005$ | $0.97 \pm 0.01$ | $1.0 \pm 0.5$
 
 I calculated e, u, and $\sigma$ in 10 runs and found the average and standard deviation, which are the values displayed in my table. S is an analytic solution, and thus had no standard deviation. The discrepancy between my values and theirs is likely due to our slightly different choice of trap geometry. It is notable that my SR algorithm performed significantly better than theirs in $e$, $u$, and $\sigma$.
@@ -53,13 +56,25 @@ The GS, GAA, and GSW algorithms all use SR as a starting guess for slm phase and
 
 In the Leonardo et. al. paper, they use $\xi = 0.5$. I found that the optimal choice of $\xi$ seems to vary depending initial phase guess around an average value of $0.74 \pm 0.10$, where $\pm 0.10$ is the standard deviation in the optimal $\xi$ values over 10 runs. Here are graphs of performance vs 100 evenly spaced values of $\xi$ between 0 and 1:
 
-[graphs of performance vs xi](https://github.com/maxnfrankel/hologram-algorithms/blob/main/GAAPerformanceVsXi.pdf)
+[GAAPerformanceVsXi.pdf](https://github.com/maxnfrankel/hologram-algorithms/files/10036176/GAAPerformanceVsXi.pdf)
 
 The values I found for $u$ at $\xi = 0.5$ are all lower than that found by Leonardo et. al., and I'm not sure why. Perhaps it has to do with our differring trap geometries, or because we are already getting different results from the SR algorithm, which is used as an initial guess for GAA. However, my SR algorithm outperforms theirs, so I don't see why my GAA algorithm shouldn't as well. My GS algorithm had performance consistent with theirs, though, and that also used my SR algorithm as an intial guess. At least the GAA algorithm does show an improvement in $e$ from the GS algorithm, although $u$ is sacrificed.
 
 My GSW also underperformed, not quite reaching $u=0.99$. However, after 100 iterations instead of 30, the algorithm achieved
+
 $e = 0.932 \pm 0.001$,   $u = 0.991 \pm 0.001$,   $\sigma = 0.4 \pm 0.2$
 
-over 10 runs.
+over 10 runs. After 500 iterations, the algorithm achieved 
+
+$e = 0.938$,   $u = 0.999997$,   $\sigma = 0.0001$
+
+Below is a graph showing the evolutionn of $e$, $u$, and $\sigma$ over iteration step number in a single run:
+
+![GSWPerformanceVsIteration](https://user-images.githubusercontent.com/110007295/202573528-cfea5604-05e3-4e05-be83-70af4dd3c51c.png)
+
+To get an idea of how close we are to our ideal values of $e=1$, $u=1$, and $\sigma=0$, here is a plot of $\log_{10}(1-e)$, $\log_{10}(1-u)$, and $\log_{10}(\sigma)$ for the same run.
+
+![GSWPerformanceVsIterationLogScale](https://user-images.githubusercontent.com/110007295/202573532-87f14621-9e1d-4273-a957-495a8e90313d.png)
+
 
 [^1]: R. Di Leonardo, F. Ianni, and G. Ruocco, "Computer generation of optimal holograms for optical trap arrays," Opt. Express 15, 1913-1922 (2007).
