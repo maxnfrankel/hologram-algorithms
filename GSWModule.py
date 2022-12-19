@@ -72,6 +72,7 @@ def GSW(slm_phase,n,xm,ym,niter,showGraph=False):
 
     for i in range(niter):
         slm_phase, w = GSW_iteration(slm_phase,ym,xm,trap_plane,w)
+        print("Iteration number: " + str(i), end="\r")    
 
     # create final SLM field
     slm = np.exp(1j*slm_phase)
