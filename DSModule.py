@@ -32,11 +32,11 @@ def evaluate_gainfunc(slm_phase,xm,ym,f):
     # return value of evaluated gain function
     return I_avg - f*sigma
 
-def DS(slm_phase,Nx,Ny,xm,ym,niter,f,showGraph=False):
+def DS(slm_phase,n,xm,ym,niter,f,showGraph=False):
 
     # inputs:
         # slm_phase: initial guess for SLM phase
-        # Nx, Ny: the SLM's dimensions in pixels
+        # n: the hologram's dimensions in pixels is nxn
         # xm, ym: both 1D arrays with the x and y coords of each trap, in order
         # niter: number of iterations algorithm
         # f:  float between 0 and 1 that increases the priority of lowering standard deviation over increasing the average intensity
@@ -48,7 +48,7 @@ def DS(slm_phase,Nx,Ny,xm,ym,niter,f,showGraph=False):
 
 
     # create trap plane with same dimensions as SLM
-    trap_plane = np.zeros((Ny,Nx), dtype=complex)
+    trap_plane = np.zeros((n,n), dtype=complex)
 
     # send light at trap locations
     trap_plane[ym,xm] = 1.0
@@ -67,7 +67,7 @@ def DS(slm_phase,Nx,Ny,xm,ym,niter,f,showGraph=False):
         print('Iteration: ',i,end='\r')
 
         # select a random pixel to adjust pixel
-        xj = randrange(Nx); yj = randrange(Ny)
+        xj = randrange(n); yj = randrange(n)
 
         # create layers of slm_phase, each layer having a different gray value of phi_j
         gray_lvls = 256
