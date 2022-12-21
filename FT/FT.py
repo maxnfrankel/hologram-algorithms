@@ -1,37 +1,46 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import imageio
+import cmath
+from PIL import Image
 import os
-import math
-from skimage.io import imread
-import matplotlib.image as mpimg
-from scipy.fft import fft2, fftshift
+from analyzeSimModule import perf
 
-name = 'PtArray'
-
+# directory
 dir_path = os.path.dirname(os.path.realpath(__file__))
-im = imread(os.path.join(dir_path,name+"Holo.bmp"))
-ch1 =(im[:,:,1]/255-0.5)*2*math.pi
 
-dim = ch1.shape
+#npx60_px10_PointArrayHolo
+#testPattern
 
-unifAmp = np.ones(dim,dtype=float)
+# import image (phase map)
+img = Image.open("FT/npx60_px10_PointArrayHolo.bmp")
+slm_phase = np.array(np.asarray(img))
 
-y,x = np.meshgrid(np.arange(-round(dim[1]/2),round(dim[1]/2)),np.arange(-round(dim[0]/2),round(dim[0]/2)))
-w = 300
-gaussianAmp = np.exp(-1*np.add(np.square(x),np.square(y))/(w**2))
+# get size of phase map
+dim = slm_phase.shape
 
-plt.figure()
-plt.imshow(gaussianAmp)
+slm = np.exp(1j*slm_phase/255*2*cmath.pi)
+
+ft = np.fft.fft2(np.fft.fftshift(slm))
+
+ftshift = np.fft.fftshift(ft)
+
+plt.imshow(abs(ftshift))
 plt.show()
 
-slm = np.multiply(gaussianAmp,np.exp(1j*ch1))
+# check performance
 
-plt.imshow(np.angle(slm))
-plt.show()
+# get trap coords
+npx = 60; npy = 60; px = 10; py = 8; offs_x = 0; offs_y = 0
+grid_xm = np.arange(-npx*px/2,npx*px/2,px)+offs_x
+grid_ym = np.arange(-npy*py/2,npy*py/2,py)+offs_y
 
-ft = fftshift(fft2(slm))
-ft[round(dim[0]/2),round(dim[1]/2)] = 0
+xm,ym = np.meshgrid(grid_xm,grid_ym)
+xm = xm.flatten().astype(int); ym = ym.flatten().astype(int)
 
-plt.imshow(np.square(abs(ft)))
-plt.show()
+"""#check overlap
+ft[ym,xm] = 1.7e4
+
+plt.imshow(np.fft.fftshift(abs(ft)))
+plt.show()"""
+
+print(perf(xm,ym,abs(ft)))

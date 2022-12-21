@@ -25,9 +25,8 @@ Ny = 1024
 npx = 60 # number of pts in x direction
 npy = 60 # number of pts in y direction
 # the hologram is calculated on a square array to ensure that the x and y directions are scaled the same way
-# choose the smaller dimension as your side length, so we get nxn array
-#n = min(Nx,Ny)
-n = min([Nx,Ny])
+# choose the larger dimension as your side length, so we get nxn array
+n = max([Nx,Ny])
 px = 10 # x periodicity
 py = 10 # y periodicity
 
@@ -76,8 +75,8 @@ slm_phase = np.round((slm_phase + cmath.pi)/(2*cmath.pi)*255)
 
 # add to fullsize SLM
 slm_phase_fullsize = np.zeros((Ny,Nx),dtype=float)
-slm_phase_fullsize[round(Ny/2 - n/2):round(Ny/2+n/2),round(Nx/2 - n/2):round(Nx/2+n/2)] = slm_phase # if slm larger than calculated hologram
-#slm_phase_fullsize = slm_phase[0:Ny,0:Nx]
+#slm_phase_fullsize[round(Ny/2 - n/2):round(Ny/2+n/2),round(Nx/2 - n/2):round(Nx/2+n/2)] = slm_phase # if slm larger than calculated hologram
+slm_phase_fullsize = slm_phase[0:Ny,0:Nx]
 
 # save hologram
 im = Image.fromarray(slm_phase_fullsize)
