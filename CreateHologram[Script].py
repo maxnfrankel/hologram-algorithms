@@ -53,10 +53,10 @@ plt.show()
 # show the FT, which is what will be observed in the focal plane of a lens
 ft = np.fft.ifftshift(np.fft.fft2(np.fft.fftshift(np.exp(1j*slm_phase))))
 
-"""plt.imshow(abs(ft))
+plt.imshow(abs(ft))
 plt.title('Resulting signal')
 plt.colorbar()
-plt.show()"""
+plt.show()
 
 # rescale to values from 0 to 255 to save phasemap as bmp, to be displayed on our SLM
 slm_phase = np.round((slm_phase + cmath.pi)/(2*cmath.pi)*255)
@@ -64,15 +64,15 @@ slm_phase = np.round((slm_phase + cmath.pi)/(2*cmath.pi)*255)
 # Crop array so that it fits on the SLM
 slm_phase_cropped = slm_phase[0:Ny,0:Nx]
 
-"""# add Fresnel lens phase with focal length f for wavelength
-f = 500-3
+# add Fresnel lens phase with focal length f for wavelength
+f = 0.5
 wavelength = 532e-9
-slm_phase_cropped = np.add(slm_phase_cropped,FresnelLens(Nx,Ny,f,pp,wavelength))%256
-"""
+slm_phase_cropped = np.add(slm_phase_cropped,-1*FresnelLens(Nx,Ny,f,pp,wavelength))%256 # multiply FresnelLens output with factor of -1 is for converging lens, +1 for diverging
+
 slm_phase_final = correct(slm_phase_cropped,Nx,Ny)
 
 # save hologram
-im = Image.fromarray(np.fft.fftshift(slm_phase_final))
+im = Image.fromarray(slm_phase_final)
 im = im.convert('L') # convert to 8-bit depth
 
-im.save("npx60_px10_PointArrayHolo_CorrectedAndLUT.bmp")
+im.save("npx60_px10_PointArrayHolo_CorrectedAndLUT_wFresnelLens.bmp")
