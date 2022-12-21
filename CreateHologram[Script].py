@@ -41,7 +41,7 @@ initial_slm_phase, perf_SR = SR(n,xm,ym,showGraph=False)
 print(perf_SR) # this tells us how well hologram created by the SR algorithm performed
 
 # now we do GSW
-slm_phase, perf_GSW = GSW(initial_slm_phase,n,xm,ym,niter=10,showGraph=False)
+slm_phase, perf_GSW = GSW(initial_slm_phase,n,xm,ym,niter=50,showGraph=False)
 print(perf_GSW) # this tells us how well hologram created by the GSW algorithm performed
 
 """# show the SLM phase
@@ -64,15 +64,15 @@ slm_phase = np.round((slm_phase + cmath.pi)/(2*cmath.pi)*255)
 # Crop array so that it fits on the SLM
 slm_phase_cropped = slm_phase[0:Ny,0:Nx]
 
-# add Fresnel lens phase with focal length f for wavelength
+"""# add Fresnel lens phase with focal length f for wavelength
 f = 500-3
 wavelength = 532e-9
 slm_phase_cropped = np.add(slm_phase_cropped,FresnelLens(Nx,Ny,f,pp,wavelength))%256
-
+"""
 slm_phase_final = correct(slm_phase_cropped,Nx,Ny)
 
 # save hologram
-im = Image.fromarray(slm_phase_final)
+im = Image.fromarray(np.fft.fftshift(slm_phase_final))
 im = im.convert('L') # convert to 8-bit depth
 
-im.save("npx60_px10_PointArrayHolo_CorrectedAndLUT_withFresnel.bmp")
+im.save("npx60_px10_PointArrayHolo_CorrectedAndLUT.bmp")
