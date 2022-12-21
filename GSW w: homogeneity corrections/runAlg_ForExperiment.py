@@ -1,11 +1,5 @@
-# this is the script from which the different algorithms can be run
-
-from RMModule import RM
-from SModule import S
+# Import the two algorithms we need
 from SRModule import SR
-from GSModule import GS
-from GAAModule import GAA
-#from DSModule import DS
 from GSWModule import GSW
 
 from PtArrayModule import PtArrayCoords

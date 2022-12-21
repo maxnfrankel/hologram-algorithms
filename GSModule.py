@@ -1,9 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.fft as fft
-from PtArrayModule import PtArrayCoords
 from analyzeSimModule import perf
-from SRModule import SR
 
 def GS_iteration(slm_phase,trap_plane):
     # get field at SLM

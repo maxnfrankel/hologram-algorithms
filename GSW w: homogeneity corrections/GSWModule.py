@@ -1,9 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.fft as fft
-from PtArrayModule import PtArrayCoords
 from analyzeSimModule import perf
-from SRModule import SR
 
 def GSW_iteration(slm_phase,ym,xm,trap_plane,w):
     # inputs:

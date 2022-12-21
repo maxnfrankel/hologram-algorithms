@@ -17,9 +17,6 @@ from PIL import Image
 
 # In this first part, we are going to set our point array specifications
 
-# set the filename you want to save to. Will end in "Holo.bmp"
-name = 'PointArray'
-
 # set the SLM dimensions
 Nx = 1280
 Ny = 1024
@@ -30,14 +27,13 @@ npy = 60 # number of pts in y direction
 # the hologram is calculated on a square array to ensure that the x and y directions are scaled the same way
 # choose the smaller dimension as your side length, so we get nxn array
 #n = min(Nx,Ny)
-n = 1280
+n = min([Nx,Ny])
 px = 10 # x periodicity
 py = 10 # y periodicity
-x_offs = 350 # x offset
 
 # done setting point array specifications
 # form pt array
-xm,ym = PtArrayCoords(npx,npy,px,py,x_offs)
+xm,ym = PtArrayCoords(npx,npy,px,py)
 
 # all the functions (RM, S, SR, GS, GAA, GSW) that perform the different algorithms take inputs in the form (Nx,Ny,xm,ym)
 # we now have all of the inputs. Just comment out all but the algorithm you want to use
@@ -80,11 +76,11 @@ slm_phase = np.round((slm_phase + cmath.pi)/(2*cmath.pi)*255)
 
 # add to fullsize SLM
 slm_phase_fullsize = np.zeros((Ny,Nx),dtype=float)
-#slm_phase_fullsize[round(Ny/2 - n/2):round(Ny/2+n/2),round(Nx/2 - n/2):round(Nx/2+n/2)] = slm_phase # if slm larger than calculated hologram
-slm_phase_fullsize = slm_phase[0:Ny,0:Nx]
+slm_phase_fullsize[round(Ny/2 - n/2):round(Ny/2+n/2),round(Nx/2 - n/2):round(Nx/2+n/2)] = slm_phase # if slm larger than calculated hologram
+#slm_phase_fullsize = slm_phase[0:Ny,0:Nx]
 
 # save hologram
 im = Image.fromarray(slm_phase_fullsize)
-im = im.convert('RGB')
+im = im.convert('L')
 
-im.save(name+"PointArrayGSW_10p_shifted_50iter_Holo.bmp")
+im.save("npx60_px10_PointArrayHolo.bmp")
