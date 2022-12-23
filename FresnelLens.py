@@ -13,6 +13,7 @@ def FresnelLens(Nx,Ny,f,pp,wavelength):
     phase = (r/wavelength) % 1
 
     plt.imshow(phase)
+    plt.title("Fresnel lens phase")
     plt.show()
 
     # convert to value between 0-255 and return
