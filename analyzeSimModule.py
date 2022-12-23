@@ -1,4 +1,4 @@
-import math
+import cmath
 import numpy as np
 
 def perf(xm,ym,sim):
@@ -10,14 +10,14 @@ def perf(xm,ym,sim):
         # u = uniformity
         # sigma = stdev in %
 
-    # get values of sim at the trap coordinates
-    sim_trap_vals = sim[ym.astype(int),xm.astype(int)]
+    # get amplitude of sim at the trap coordinates
+    sim_trap_vals = abs(sim[ym.astype(int),xm.astype(int)])
 
     # get simulated trap intensities
     ITraps = np.square(sim_trap_vals)
 
     # calculate the efficiency
-    Iwhole = np.sum(np.square(sim)) # calculate the total intensity in the simulated plane. Will divide trap intensity sum by this amt
+    Iwhole = np.sum(np.square(abs(sim))) # calculate the total intensity in the simulated plane. Will divide trap intensity sum by this amt
     Isum = np.sum(ITraps) # calculate the sum of the simulated trap intensities
     e = Isum/Iwhole
 
@@ -28,6 +28,6 @@ def perf(xm,ym,sim):
     # calculate the % stdev
     IAvg = np.mean(ITraps)
     inBrackets = np.square(np.add(ITraps,-IAvg))#(I - <I>)^2
-    sigma = math.sqrt(np.mean(inBrackets))/IAvg
+    sigma = cmath.sqrt(np.mean(inBrackets))/IAvg
 
     return [e,u,sigma]
