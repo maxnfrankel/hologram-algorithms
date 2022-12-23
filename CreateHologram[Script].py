@@ -71,13 +71,13 @@ wavelength = 532e-9
 slm_phase = np.add(slm_phase,-1*FresnelLens(Nx,Ny,f,pp,wavelength))%256 # multiply FresnelLens output with factor of -1 is for converging lens, +1 for diverging
 
 # add spiral phase
-slm_phase = np.add(slm_phase,spiral(Nx,Ny,1))
+slm_phase = np.add(slm_phase,spiral(Nx,Ny,1))%256
 
 # apply corrections for SLM surface irregularities and wavelength-dependent phase modulation
 slm_phase = correct(slm_phase,Nx,Ny)
 
 # convert to integer
-slm_phase_final = slm_phase.astype(np.uint8)
+slm_phase_final = np.floor(slm_phase) # ensures that 255 is the max value
 
 plt.imshow(slm_phase_final)
 plt.title('Final hologram')
