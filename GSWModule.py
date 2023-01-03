@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy.fft as fft
 from analyzeSimModule import perf
 
 def GSW_iteration(slm_phase,ym,xm,trap_plane,w):
@@ -14,7 +13,7 @@ def GSW_iteration(slm_phase,ym,xm,trap_plane,w):
     slm = np.exp(1j*slm_phase)
 
     # get signal field and extract phase and amplitude
-    signal = fft.fft2(slm)
+    signal = np.fft.fft2(slm)
     trap_phase = np.angle(signal)[ym,xm]
     trap_amplitudes = np.abs(signal)[ym,xm]
 
@@ -32,7 +31,7 @@ def GSW_iteration(slm_phase,ym,xm,trap_plane,w):
     trap_plane[ym,xm] = Vm
 
     # create slm field and extract phase
-    slm = fft.ifft2(trap_plane)
+    slm = np.fft.ifft2(trap_plane)
     slm_phase = np.angle(slm)
 
     # only return phase
@@ -58,7 +57,7 @@ def GSW(slm_phase,n,xm,ym,niter,showGraph=False):
     trap_plane[ym.astype(int),xm.astype(int)] = 1.0
 
     if showGraph == True:
-        plt.imshow(fft.fftshift(abs(trap_plane)))
+        plt.imshow(np.fft.fftshift(abs(trap_plane)))
         plt.title('Target signal')
         plt.show()
 
@@ -76,14 +75,14 @@ def GSW(slm_phase,n,xm,ym,niter,showGraph=False):
     slm = np.exp(1j*slm_phase)
 
     # take the Fourier Transform to get the signal
-    ft = fft.fft2((slm))
+    ft = np.fft.fft2((slm))
 
     performance = perf(xm,ym,abs(ft))
 
     if showGraph == True:
-        plt.imshow(fft.fftshift(abs(ft)))
+        plt.imshow(np.fft.fftshift(abs(ft)))
         plt.title('Resulting signal')
         plt.colorbar()
         plt.show()
 
-    return fft.fftshift(slm_phase), performance
+    return np.fft.fftshift(slm_phase), performance
