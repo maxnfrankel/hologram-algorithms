@@ -7,7 +7,7 @@ def correct(slm_phase,Nx,Ny):
     
     # first, we want to apply the correction needed for 532nm light due to SLM surface irregularity
     im = Image.open("532nmCorrection.bmp")
-    correction = np.array(np.asarray(im))
+    correction = np.array(np.asarray(im)) # np.asarray() is read only, so np.array(np.asarray()) is necessary
     slm_phase = np.add(slm_phase,correction) % 256 # wrap phases around if they exceed the max value
 
     # now apply LUT
